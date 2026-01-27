@@ -1,15 +1,35 @@
-import { createBrowserRouter } from "react-router";
+/* eslint-disable react-refresh/only-export-components */
+import { createBrowserRouter, Outlet } from "react-router";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import Home from "./pages/Home";
+import Header from "./components/Header";
 
-export const router = createBrowserRouter([ 
+const Layout = () => {
+  return (
+    <div className="flex min-h-screen flex-col bg-[#161410]">
+      <Header />
+      <Outlet />
+    </div>
+  );
+};
+
+export const router = createBrowserRouter([
+  {
+    element: <Layout />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+    ],
+  },
   {
     path: "/login",
-    element: <Login />
+    element: <Login />,
   },
   {
     path: "/register",
-    element: <Register />
-  }
+    element: <Register />,
+  },
 ]);
-

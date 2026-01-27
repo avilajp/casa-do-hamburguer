@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Input from "../components/Input";
+import { Link } from "react-router";
+import Button from "../components/Button";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -20,7 +22,9 @@ const Register = () => {
       onSubmit={handleSubmit}
     >
       <div className="flex flex-col items-center justify-center gap-2">
-        <img src="./logo.png" alt="" className="md-4" />
+        <Link to="/">
+          <img src="./logo.png" alt="" className="md-4" />
+        </Link>
 
         <Input placeholder="Nome" onChange={(e) => setName(e.target.value)} />
 
@@ -48,9 +52,10 @@ const Register = () => {
           onChange={(e) => setCep(e.target.value)}
         />
 
-        <button className="w-full cursor-pointer rounded-md bg-[#C92A0E] py-2 text-sm font-bold text-white">
-          Registrar
-        </button>
+        <Button title="Criar Conta" />
+        <Link to="/login" className="w-full">
+          <Button title="Já tenho uma Conta" variant="outline" />
+        </Link>
       </div>
     </form>
   );
