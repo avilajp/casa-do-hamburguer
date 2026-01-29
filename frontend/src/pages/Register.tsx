@@ -10,10 +10,18 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [cep, setCep] = useState("");
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    console.log({ name, email, password, confirmPassword, cep });
+    const response = await fetch("http://localhost:3000/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, email, password, confirmPassword, cep }),
+    });
+    const data = await response.json();
+    console.log(data);
   }
 
   return (
@@ -52,7 +60,7 @@ const Register = () => {
           onChange={(e) => setCep(e.target.value)}
         />
 
-        <Button title="Criar Conta" />
+        <Button title="Criar Conta" type="submit" />
         <Link to="/login" className="w-full">
           <Button title="Já tenho uma Conta" variant="outline" />
         </Link>
